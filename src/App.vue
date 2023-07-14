@@ -1,16 +1,8 @@
 <template>
-  <header class="header">
-    <figure class="header__logo-container">
-      <img src="" alt="" class="header__logo" />
-    </figure>
-  </header>
+  <Header />
 </template>
 
-<script setup lang="ts"></script>
-
-<style scoped lang="scss">
-.header {
-  padding: 16px;
-  background-color: var(--background);
-}
-</style>
+<script setup lang="ts">
+import Header from '@/components/Header/Header.vue';
+</script>
+<style scoped lang="scss"></style>

@@ -5,7 +5,17 @@
   "plugins": [
     "stylelint-order"
   ],
+  "overrides": [
+    {
+      "files": ["*.vue", "**/*.vue"],
+      "extends": [
+        "stylelint-config-standard-scss",
+        "stylelint-config-standard-vue/scss"
+      ]
+    }
+  ],
   "rules": {
+    "no-empty-source": null,
     "length-zero-no-unit": true,
     "color-hex-case": "lower",
     "font-family-name-quotes": "always-unless-keyword",
