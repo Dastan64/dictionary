@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import chevron from '@/assets/images/chevron.svg';
 import { ref, watch } from 'vue';
-import { useFontStore } from '@/stores/font';
+import { useFontStore } from '@/stores/fonts/font';
 import { storeToRefs } from 'pinia';
 
 const store = useFontStore();

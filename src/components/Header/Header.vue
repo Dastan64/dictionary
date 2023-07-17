@@ -4,7 +4,7 @@ import loupe from '@/assets/images/loupe.svg';
 import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher.vue';
 import FontSwitcher from '@/components/FontSwitcher/FontSwitcher.vue';
 import { ref } from 'vue';
-import { useWordStore } from '@/stores/word';
+import { useWordStore } from '@/stores/word/word';
 
 const query = ref('');
 const store = useWordStore();

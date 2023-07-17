@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import play from '@/assets/images/play.svg';
-import { useWordStore } from '@/stores/word';
+import { useWordStore } from '@/stores/word/word';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
@@ -10,7 +10,7 @@ const { word, audio } = storeToRefs(store);
 const audioRef = ref<HTMLAudioElement | null>(null);
 
 const playAudio = () => {
-  audioRef?.value.play();
+  audioRef?.value?.play();
 };
 </script>
 
@@ -18,8 +18,10 @@ const playAudio = () => {
   <section class="core">
     <div class="core__container">
       <div class="core__text">
-        <h2 class="core__title">{{ word?.word }}</h2>
-        <span class="core__phonetics">{{ word?.phonetic }}</span>
+        <template v-if="word">
+          <h2 class="core__title">{{ word.word }}</h2>
+          <span class="core__phonetics">{{ word.phonetic }}</span>
+        </template>
       </div>
       <button type="button" class="core__play-button" @click="playAudio">
         <img width="75" height="75" :src="play" alt="" />

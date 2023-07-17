@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Header from '@/components/Header/Header.vue';
 import WordInfo from '@/components/WordInfo/WordInfo.vue';
-import { useWordStore } from '@/stores/word';
+import { useWordStore } from '@/stores/word/word';
 
 const store = useWordStore();
 </script>
