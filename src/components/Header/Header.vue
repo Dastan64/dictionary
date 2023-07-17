@@ -1,8 +1,13 @@
 <script setup lang="ts">
+//Assets
 import logo from '@/assets/images/logo.svg';
 import loupe from '@/assets/images/loupe.svg';
+
+//Components
 import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher.vue';
 import FontSwitcher from '@/components/FontSwitcher/FontSwitcher.vue';
+
+//Core and typings
 import { ref } from 'vue';
 import { useWordStore } from '@/stores/word/word';
 
@@ -11,12 +16,7 @@ const store = useWordStore();
 
 const handleSubmit = () => {
   if (query.value) {
-    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${query.value}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data[0]);
-        store.word = data[0];
-      });
+    store.searchWord(query.value);
   }
 };
 </script>

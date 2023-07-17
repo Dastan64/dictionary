@@ -1,10 +1,26 @@
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
-import type { IWord } from '@/stores/word/types';
+import type { IErrorData, IWord } from '@/stores/word/types';
 
 export const useWordStore = defineStore('word', () => {
   const word = ref<IWord | null>(null);
+  const error = ref<IErrorData | null>(null);
   const audio = ref('');
+
+  const searchWord = (query: string) => {
+    if (query) {
+      fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${query}`)
+        .then((response) => response.json())
+        .then((data: IWord[] | IErrorData) => {
+          if (Array.isArray(data)) {
+            word.value = data[0];
+            error.value = null;
+          } else {
+            error.value = data;
+          }
+        });
+    }
+  };
 
   watch(word, (newValue) => {
     if (newValue) {
@@ -15,5 +31,5 @@ export const useWordStore = defineStore('word', () => {
       }
     }
   });
-  return { word, audio };
+  return { word, audio, error, searchWord };
 });

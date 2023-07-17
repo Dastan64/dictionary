@@ -32,3 +32,9 @@ export interface IPhonetic {
   sourceUrl?: string;
   license?: ILicense;
 }
+
+export interface IErrorData {
+  message: string;
+  resolution: string;
+  title: string;
+}
