@@ -1,23 +1,40 @@
 <script setup lang="ts">
 import chevron from '@/assets/images/chevron.svg';
+import { ref, watch } from 'vue';
+import { useFontStore } from '@/stores/font';
+import { storeToRefs } from 'pinia';
+
+const store = useFontStore();
+const { currentFont, fontFamilies } = storeToRefs(store);
+const isDropdownOpen = ref(false);
+
+const changeFont = (fontFamily: string) => {
+  isDropdownOpen.value = !isDropdownOpen.value;
+  currentFont.value = fontFamily.toLowerCase();
+};
+
+const toggleDropdown = () => {
+  isDropdownOpen.value = !isDropdownOpen.value;
+};
+
+watch(currentFont, (newValue, oldValue) => {
+  document.getElementById('app')!.classList.remove(oldValue);
+  document.getElementById('app')!.classList.add(newValue);
+});
 </script>
 
 <template>
   <div class="switcher">
-    <button class="switcher__button">
-      <span>Sans Serif</span>
+    <button class="switcher__button" @click="toggleDropdown">
+      <span>{{ currentFont }}</span>
       <img :src="chevron" alt="" />
     </button>
-    <div class="switcher__fonts fonts">
+    <div class="switcher__fonts fonts" :class="{ 'fonts--open': isDropdownOpen }">
       <ul class="fonts__list">
-        <li>
-          <button>Sans Serif</button>
-        </li>
-        <li>
-          <button>Serif</button>
-        </li>
-        <li>
-          <button>Mono</button>
+        <li v-for="font in fontFamilies">
+          <button :value="font.family" :class="font.family" @click="changeFont(font.family)">
+            {{ font.text }}
+          </button>
         </li>
       </ul>
     </div>
@@ -34,8 +51,13 @@ import chevron from '@/assets/images/chevron.svg';
     gap: 18px;
     border: none;
     font-size: 1.125rem;
+    font-weight: 700;
     cursor: pointer;
     background-color: transparent;
+
+    span {
+      text-transform: capitalize;
+    }
   }
 
   &__fonts {
@@ -48,23 +70,47 @@ import chevron from '@/assets/images/chevron.svg';
 }
 
 .fonts {
+  display: none;
   padding: 24px;
   border-radius: 16px;
   background-color: var(--white);
 
+  &--open {
+    display: block;
+  }
+
   &__list {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 16px;
     list-style: none;
 
+    li {
+      width: 100%;
+    }
+
     button {
+      width: 100%;
       border: none;
       font-size: 1.125rem;
       line-height: 1.3;
+      text-align: left;
       cursor: pointer;
       background-color: transparent;
       transition: color 0.2s;
+
+      &.serif {
+        font-family: 'Lora', serif;
+      }
+
+      &.sans-serif {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+      }
+
+      &.mono {
+        font-family: 'Inconsolata', monospace;
+      }
 
       &:hover {
         color: var(--accent);

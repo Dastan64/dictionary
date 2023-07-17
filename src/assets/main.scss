@@ -1,0 +1,19 @@
+@import 'base';
+
+#app {
+  max-width: 736px;
+  margin: 0 auto;
+  font-family: "Inter", "Segoe UI", sans-serif;
+
+  &.serif {
+    font-family: 'Lora', serif;
+  }
+
+  &.sans-serif {
+    font-family: "Inter", "Segoe UI", sans-serif;
+  }
+
+  &.mono {
+    font-family: 'Inconsolata', monospace;
+  }
+}

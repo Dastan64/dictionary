@@ -1,7 +1,0 @@
-@import './base.css';
-
-#app {
-    max-width: 736px;
-    margin: 0 auto;
-    font-family: "Inter", "Segoe UI", sans-serif;
-}
