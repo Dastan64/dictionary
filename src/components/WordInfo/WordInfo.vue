@@ -12,7 +12,7 @@ const { word, audio } = storeToRefs(store);
 const audioRef = ref<HTMLAudioElement | null>(null);
 
 const playAudio = () => {
-  audioRef?.value?.play();
+  audioRef.value?.play();
 };
 </script>
 
@@ -55,12 +55,12 @@ const playAudio = () => {
     <div class="meaning">
       <h3 class="meaning__title">Meaning</h3>
       <ul class="meaning__list">
-        <li v-for="item in word?.meanings[1].definitions">
+        <li v-for="item in word?.meanings[1]?.definitions">
           <span>{{ item.definition }}</span>
           <p class="meaning__example">"{{ item.example }}"</p>
         </li>
       </ul>
-      <div class="synonyms" v-if="word && word.meanings[1].synonyms.length > 0">
+      <div class="synonyms" v-if="word && word.meanings[1]?.synonyms.length > 0">
         <span class="synonyms__caption">Synonyms:</span>
         <ul class="synonyms__list"></ul>
       </div>

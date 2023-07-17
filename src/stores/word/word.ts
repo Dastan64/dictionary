@@ -4,19 +4,23 @@ import type { IErrorData, IWord } from '@/stores/word/types';
 
 export const useWordStore = defineStore('word', () => {
   const word = ref<IWord | null>(null);
+  const status = ref<'loading' | 'success' | 'failed' | 'idle'>('idle');
   const error = ref<IErrorData | null>(null);
   const audio = ref('');
 
   const searchWord = (query: string) => {
     if (query) {
+      status.value = 'loading';
       fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${query}`)
         .then((response) => response.json())
         .then((data: IWord[] | IErrorData) => {
           if (Array.isArray(data)) {
             word.value = data[0];
+            status.value = 'success';
             error.value = null;
           } else {
             error.value = data;
+            status.value = 'failed';
           }
         });
     }
@@ -31,5 +35,5 @@ export const useWordStore = defineStore('word', () => {
       }
     }
   });
-  return { word, audio, error, searchWord };
+  return { word, status, audio, error, searchWord };
 });
