@@ -15,6 +15,7 @@
     }
   ],
   "rules": {
+    "media-feature-range-notation": "prefix",
     "no-empty-source": null,
     "length-zero-no-unit": true,
     "color-hex-case": "lower",

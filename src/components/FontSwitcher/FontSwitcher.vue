@@ -50,10 +50,14 @@ watch(currentFont, (newValue, oldValue) => {
     align-items: center;
     gap: 18px;
     border: none;
-    font-size: 1.125rem;
+    font-size: clamp(0.875rem, 5vw - 1rem, 1.125rem);
     font-weight: 700;
     cursor: pointer;
     background-color: transparent;
+
+    @media screen and (max-width: 576px) {
+      gap: 16px;
+    }
 
     span {
       text-transform: capitalize;

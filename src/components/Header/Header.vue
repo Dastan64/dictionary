@@ -9,7 +9,7 @@ import FontSwitcher from '@/components/FontSwitcher/FontSwitcher.vue';
   <header class="header">
     <div class="header__top">
       <figure class="header__logo-container">
-        <img :src="logo" alt="Dictionary" class="header__logo" />
+        <img width="32" height="32" :src="logo" alt="Dictionary" class="header__logo" />
       </figure>
       <div class="header__settings">
         <FontSwitcher />
@@ -35,12 +35,16 @@ import FontSwitcher from '@/components/FontSwitcher/FontSwitcher.vue';
 
 <style scoped lang="scss">
 .header {
-  padding: 58px 16px 16px;
+  padding: 58px 0;
 
   &__top {
     display: flex;
     align-items: center;
     margin-bottom: 50px;
+
+    @media screen and (max-width: 576px) {
+      margin-bottom: 24px;
+    }
   }
 
   &__settings {
@@ -48,6 +52,10 @@ import FontSwitcher from '@/components/FontSwitcher/FontSwitcher.vue';
     align-items: center;
     gap: 26px;
     margin-left: auto;
+
+    @media screen and (max-width: 576px) {
+      gap: 16px;
+    }
   }
 
   .split-line {

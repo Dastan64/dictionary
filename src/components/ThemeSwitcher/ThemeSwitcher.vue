@@ -16,6 +16,10 @@ import moon from '@/assets/images/moon.svg';
   align-items: center;
   gap: 20px;
 
+  @media screen and (max-width: 576px) {
+    gap: 12px;
+  }
+
   &__label {
     position: relative;
     display: block;
