@@ -56,7 +56,8 @@ const playAudio = () => {
       <h3 class="meaning__title">Meaning</h3>
       <ul class="meaning__list">
         <li v-for="item in word?.meanings[1].definitions">
-          {{ item.definition }}
+          <span>{{ item.definition }}</span>
+          <p class="meaning__example">"{{ item.example }}"</p>
         </li>
       </ul>
       <div class="synonyms" v-if="word && word.meanings[1].synonyms.length > 0">
@@ -184,6 +185,11 @@ const playAudio = () => {
         color: var(--purple);
       }
     }
+  }
+
+  &__example {
+    margin-top: 12px;
+    color: var(--grey2);
   }
 }
 

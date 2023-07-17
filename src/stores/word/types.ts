@@ -22,6 +22,7 @@ export interface IMeaning {
 export interface IDefinition {
   definition: string;
   synonyms: any[];
+  example: string;
   antonyms: string[];
 }
 
