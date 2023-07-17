@@ -37,6 +37,10 @@ import FontSwitcher from '@/components/FontSwitcher/FontSwitcher.vue';
 .header {
   padding: 58px 0;
 
+  @media screen and (max-width: 576px) {
+    padding-top: 24px;
+  }
+
   &__top {
     display: flex;
     align-items: center;
