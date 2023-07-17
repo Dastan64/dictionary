@@ -3,6 +3,22 @@ import logo from '@/assets/images/logo.svg';
 import loupe from '@/assets/images/loupe.svg';
 import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher.vue';
 import FontSwitcher from '@/components/FontSwitcher/FontSwitcher.vue';
+import { ref } from 'vue';
+import { useWordStore } from '@/stores/word';
+
+const query = ref('');
+const store = useWordStore();
+
+const handleSubmit = () => {
+  if (query.value) {
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${query.value}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data[0]);
+        store.word = data[0];
+      });
+  }
+};
 </script>
 
 <template>
@@ -18,8 +34,9 @@ import FontSwitcher from '@/components/FontSwitcher/FontSwitcher.vue';
       </div>
     </div>
     <div class="header__search search">
-      <form class="search__form">
+      <form class="search__form" @submit.prevent="handleSubmit">
         <input
+          v-model="query"
           type="text"
           class="search__input"
           aria-label="Search the word..."
@@ -35,7 +52,7 @@ import FontSwitcher from '@/components/FontSwitcher/FontSwitcher.vue';
 
 <style scoped lang="scss">
 .header {
-  padding: 58px 0;
+  padding: 58px 0 0;
 
   @media screen and (max-width: 576px) {
     padding-top: 24px;
