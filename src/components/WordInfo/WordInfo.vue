@@ -25,10 +25,12 @@ const playAudio = () => {
           <span class="core__phonetics">{{ word.phonetic }}</span>
         </template>
       </div>
-      <button type="button" class="core__play-button" @click="playAudio">
-        <img width="75" height="75" :src="play" alt="" />
-      </button>
-      <audio ref="audioRef" :src="audio" class="core__audio core__audio_hidden"></audio>
+      <template v-if="audio">
+        <button type="button" class="core__play-button" @click="playAudio">
+          <img width="75" height="75" :src="play" alt="" />
+        </button>
+        <audio ref="audioRef" :src="audio" class="core__audio core__audio_hidden"></audio>
+      </template>
     </div>
   </section>
   <section class="noun">
