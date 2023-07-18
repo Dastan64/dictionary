@@ -200,7 +200,6 @@ const playAudio = () => {
 
 .synonyms {
   display: flex;
-  align-items: center;
   gap: 24px;
   padding-top: 64px;
 
@@ -216,6 +215,7 @@ const playAudio = () => {
 
   &__list {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     list-style: none;
 
