@@ -7,16 +7,16 @@ import loupe from '@/assets/images/loupe.svg';
 import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher.vue';
 import FontSwitcher from '@/components/FontSwitcher/FontSwitcher.vue';
 
-//Core and typings
+//Core
 import { ref } from 'vue';
-import { useWordStore } from '@/stores/word/word';
+import router from '@/router/router';
 
 const query = ref('');
-const store = useWordStore();
 
 const handleSubmit = () => {
   if (query.value) {
-    store.searchWord(query.value);
+    router.push(`/search/${query.value}`);
+    query.value = '';
   }
 };
 </script>

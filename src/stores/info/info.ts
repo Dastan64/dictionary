@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
-import type { IErrorData, IWord } from '@/stores/word/types';
+import type { IErrorData, IWord } from '@/stores/info/types';
 
-export const useWordStore = defineStore('word', () => {
-  const word = ref<IWord | null>(null);
+export const useInfoStore = defineStore('word', () => {
+  const info = ref<IWord | null>(null);
   const status = ref<'loading' | 'success' | 'failed' | 'idle'>('idle');
   const error = ref<IErrorData | null>(null);
   const audio = ref('');
@@ -15,7 +15,7 @@ export const useWordStore = defineStore('word', () => {
         .then((response) => response.json())
         .then((data: IWord[] | IErrorData) => {
           if (Array.isArray(data)) {
-            word.value = data[0];
+            info.value = data[0];
             status.value = 'success';
             error.value = null;
           } else {
@@ -26,7 +26,7 @@ export const useWordStore = defineStore('word', () => {
     }
   };
 
-  watch(word, (newValue) => {
+  watch(info, (newValue) => {
     if (newValue) {
       const target = newValue?.phonetics.find((obj) => obj.audio);
 
@@ -35,5 +35,5 @@ export const useWordStore = defineStore('word', () => {
       }
     }
   });
-  return { word, status, audio, error, searchWord };
+  return { info, status, audio, error, searchWord };
 });

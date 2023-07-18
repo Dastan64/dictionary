@@ -2,12 +2,12 @@
 //Assets
 import play from '@/assets/images/play.svg';
 
-import { useWordStore } from '@/stores/word/word';
+import { useInfoStore } from '@/stores/info/info';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
-const store = useWordStore();
-const { word, audio } = storeToRefs(store);
+const store = useInfoStore();
+const { info, audio } = storeToRefs(store);
 
 const audioRef = ref<HTMLAudioElement | null>(null);
 
@@ -20,9 +20,9 @@ const playAudio = () => {
   <section class="core">
     <div class="core__container">
       <div class="core__text">
-        <template v-if="word">
-          <h2 class="core__title">{{ word.word }}</h2>
-          <span class="core__phonetics">{{ word.phonetic }}</span>
+        <template v-if="info">
+          <h2 class="core__title">{{ info.word }}</h2>
+          <span class="core__phonetics">{{ info.phonetic }}</span>
         </template>
       </div>
       <template v-if="audio">
@@ -38,31 +38,31 @@ const playAudio = () => {
     <div class="meaning">
       <h3 class="meaning__title">Meaning</h3>
       <ul class="meaning__list">
-        <li v-for="item in word?.meanings[0].definitions">
+        <li v-for="item in info?.meanings[0].definitions">
           {{ item.definition }}
         </li>
       </ul>
-      <div class="synonyms" v-if="word && word.meanings[0].synonyms.length > 0">
+      <div class="synonyms" v-if="info && info.meanings[0].synonyms.length > 0">
         <span class="synonyms__caption">Synonyms:</span>
         <ul class="synonyms__list">
-          <li v-for="item in word.meanings[0].synonyms">
+          <li v-for="item in info.meanings[0].synonyms">
             {{ item }}
           </li>
         </ul>
       </div>
     </div>
   </section>
-  <section class="verb" v-if="word?.meanings[1]">
+  <section class="verb" v-if="info?.meanings[1]">
     <h2 class="verb__title">verb</h2>
     <div class="meaning">
       <h3 class="meaning__title">Meaning</h3>
       <ul class="meaning__list">
-        <li v-for="item in word.meanings[1].definitions">
+        <li v-for="item in info.meanings[1].definitions">
           <span>{{ item.definition }}</span>
           <p class="meaning__example">"{{ item.example }}"</p>
         </li>
       </ul>
-      <div class="synonyms" v-if="word.meanings[1].synonyms.length > 0">
+      <div class="synonyms" v-if="info.meanings[1].synonyms.length > 0">
         <span class="synonyms__caption">Synonyms:</span>
         <ul class="synonyms__list"></ul>
       </div>
@@ -72,8 +72,8 @@ const playAudio = () => {
     <p>
       <span>Source:</span>
       <cite
-        ><a target="_blank" rel="noopener" :href="word?.sourceUrls[0]">{{
-          word?.sourceUrls[0]
+        ><a target="_blank" rel="noopener" :href="info?.sourceUrls[0]">{{
+          info?.sourceUrls[0]
         }}</a></cite
       >
     </p>

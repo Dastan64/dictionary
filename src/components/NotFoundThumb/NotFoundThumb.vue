@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import emoji from '@/assets/images/emoji-not-found.png';
 import type { NotFoundThumbProps } from '@/components/NotFoundThumb/types';
-import { useWordStore } from '@/stores/word/word';
+import { useInfoStore } from '@/stores/info/info';
 import { storeToRefs } from 'pinia';
 
 defineProps<NotFoundThumbProps>();
-const store = useWordStore();
+const store = useInfoStore();
 const { error } = storeToRefs(store);
 </script>
 
