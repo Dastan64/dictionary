@@ -42,10 +42,10 @@ const playAudio = () => {
           {{ item.definition }}
         </li>
       </ul>
-      <div class="synonyms">
+      <div class="synonyms" v-if="word && word.meanings[0].synonyms.length > 0">
         <span class="synonyms__caption">Synonyms:</span>
         <ul class="synonyms__list">
-          <li v-for="item in word?.meanings[0].synonyms">
+          <li v-for="item in word.meanings[0].synonyms">
             {{ item }}
           </li>
         </ul>
