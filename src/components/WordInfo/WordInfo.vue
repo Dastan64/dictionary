@@ -2,6 +2,7 @@
 //Assets
 import play from '@/assets/images/play.svg';
 
+//Core
 import { useInfoStore } from '@/stores/info/info';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
@@ -45,8 +46,9 @@ const playAudio = () => {
       <div class="synonyms" v-if="info && info.meanings[0].synonyms.length > 0">
         <span class="synonyms__caption">Synonyms:</span>
         <ul class="synonyms__list">
-          <li v-for="item in info.meanings[0].synonyms">
-            {{ item }}
+          <li v-for="(item, index) in info.meanings[0].synonyms">
+            <router-link :to="`/search/${item}`">{{ item }}</router-link>
+            <span v-if="index < info.meanings[0].synonyms.length - 1">&#44;</span>
           </li>
         </ul>
       </div>
@@ -213,7 +215,14 @@ const playAudio = () => {
   }
 
   &__list {
+    display: flex;
+    gap: 8px;
     list-style: none;
+
+    a {
+      font-size: clamp(1rem, 5vw - 1rem, 1.25rem);
+      color: var(--accent);
+    }
   }
 }
 
