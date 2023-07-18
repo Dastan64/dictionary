@@ -33,8 +33,15 @@ const handleAudioEnding = () => {
         </template>
       </div>
       <template v-if="audio">
-        <button type="button" class="core__play-button" @click="playAudio">
+        <button
+          aria-label="Listen to the pronunciation"
+          type="button"
+          class="core__play-button"
+          @click="playAudio"
+          title="Listen to the pronunciation"
+        >
           <svg
+            role="img"
             class="core__play-icon"
             width="75px"
             height="75px"
