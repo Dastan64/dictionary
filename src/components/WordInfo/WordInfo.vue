@@ -1,19 +1,25 @@
 <script setup lang="ts">
-//Assets
-import play from '@/assets/images/play.svg';
-
 //Core
 import { useInfoStore } from '@/stores/info/info';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
+import { useThemeStore } from '@/stores/theme/theme';
 
 const store = useInfoStore();
+const themeStore = useThemeStore();
+const { isDarkTheme } = storeToRefs(themeStore);
 const { info, audio } = storeToRefs(store);
 
+const isPlaying = ref(false);
 const audioRef = ref<HTMLAudioElement | null>(null);
 
 const playAudio = () => {
   audioRef.value?.play();
+  isPlaying.value = true;
+};
+
+const handleAudioEnding = () => {
+  isPlaying.value = false;
 };
 </script>
 
@@ -28,9 +34,38 @@ const playAudio = () => {
       </div>
       <template v-if="audio">
         <button type="button" class="core__play-button" @click="playAudio">
-          <img width="75" height="75" :src="play" alt="" />
+          <svg
+            class="core__play-icon"
+            width="75px"
+            height="75px"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            :stroke="isDarkTheme ? '#fff' : '#a445ed'"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="miter"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <polygon
+                points="2 8 2 16 6 16 13 21 13 3 6 8 2 8"
+                :fill="isPlaying ? '#a445ed' : '#fff'"
+                stroke-width="0"
+              ></polygon>
+              <polygon points="2 8 2 16 6 16 13 21 13 3 6 8 2 8"></polygon>
+              <path d="M17.72,5.55a7,7,0,0,1,0,12.9"></path>
+              <path d="M17.12,9.88a3,3,0,0,1,0,4.24"></path>
+            </g>
+          </svg>
         </button>
-        <audio ref="audioRef" :src="audio" class="core__audio core__audio_hidden"></audio>
+        <audio
+          ref="audioRef"
+          :src="audio"
+          class="core__audio core__audio_hidden"
+          @ended="handleAudioEnding"
+        ></audio>
       </template>
     </div>
   </section>
@@ -84,7 +119,7 @@ const playAudio = () => {
 
 <style scoped lang="scss">
 .core {
-  color: var(--dark2);
+  color: var(--text-color);
 
   &__container {
     display: flex;
@@ -111,7 +146,7 @@ const playAudio = () => {
     cursor: pointer;
     background-color: transparent;
 
-    img {
+    svg {
       @media screen and (max-width: 576px) {
         width: 48px;
         height: 48px;
@@ -129,6 +164,7 @@ const playAudio = () => {
 .noun,
 .verb {
   padding: 40px 0;
+  color: var(--text-color);
 
   @media screen and (max-width: 576px) {
     padding: 28px 0;
@@ -240,8 +276,8 @@ const playAudio = () => {
 
   a {
     font-style: normal;
-    color: var(--dark2);
-    text-decoration-color: var(--dark2);
+    color: var(--text-color);
+    text-decoration-color: var(--text-color);
   }
 }
 </style>

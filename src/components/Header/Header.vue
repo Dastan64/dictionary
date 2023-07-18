@@ -10,6 +10,11 @@ import FontSwitcher from '@/components/FontSwitcher/FontSwitcher.vue';
 //Core
 import { ref } from 'vue';
 import router from '@/router/router';
+import { useThemeStore } from '@/stores/theme/theme';
+import { storeToRefs } from 'pinia';
+
+const store = useThemeStore();
+const { isDarkTheme } = storeToRefs(store);
 
 const query = ref('');
 
@@ -28,9 +33,9 @@ const handleSubmit = () => {
         <img width="32" height="32" :src="logo" alt="Dictionary" class="header__logo" />
       </figure>
       <div class="header__settings">
-        <FontSwitcher />
+        <FontSwitcher :isDarkTheme="isDarkTheme" />
         <span class="split-line"></span>
-        <ThemeSwitcher />
+        <ThemeSwitcher isDarkTheme="isDarkTheme" />
       </div>
     </div>
     <div class="header__search search">
@@ -103,6 +108,7 @@ const handleSubmit = () => {
       border: none;
       border-radius: 8px;
       font-size: clamp(1rem, 1vw + 0.5rem, calc(20rem / 16));
+      color: var(--text-color);
       background-color: var(--input-background);
       caret-color: var(--accent);
 

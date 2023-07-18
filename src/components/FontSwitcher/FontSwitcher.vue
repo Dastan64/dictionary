@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import chevron from '@/assets/images/chevron.svg';
+
 import { ref, watch } from 'vue';
 import { useFontStore } from '@/stores/fonts/font';
 import { storeToRefs } from 'pinia';
@@ -7,6 +8,8 @@ import { storeToRefs } from 'pinia';
 const store = useFontStore();
 const { currentFont, fontFamilies } = storeToRefs(store);
 const isDropdownOpen = ref(false);
+
+defineProps<{ isDarkTheme: boolean }>();
 
 const changeFont = (fontFamily: string) => {
   isDropdownOpen.value = !isDropdownOpen.value;
@@ -29,7 +32,10 @@ watch(currentFont, (newValue, oldValue) => {
       <span>{{ currentFont }}</span>
       <img :src="chevron" alt="" />
     </button>
-    <div class="switcher__fonts fonts" :class="{ 'fonts--open': isDropdownOpen }">
+    <div
+      class="switcher__fonts fonts"
+      :class="{ 'fonts--open': isDropdownOpen, 'fonts_with-shadow': isDarkTheme }"
+    >
       <ul class="fonts__list">
         <li v-for="font in fontFamilies">
           <button :value="font.family" :class="font.family" @click="changeFont(font.family)">
@@ -52,6 +58,7 @@ watch(currentFont, (newValue, oldValue) => {
     border: none;
     font-size: clamp(0.875rem, 5vw - 1rem, 1.125rem);
     font-weight: 700;
+    color: var(--text-color);
     cursor: pointer;
     background-color: transparent;
 
@@ -77,7 +84,11 @@ watch(currentFont, (newValue, oldValue) => {
   display: none;
   padding: 24px;
   border-radius: 16px;
-  background-color: var(--white);
+  background-color: var(--bg-color-2);
+
+  &_with-shadow {
+    box-shadow: 0 5px 30px 0 var(--accent);
+  }
 
   &--open {
     display: block;
@@ -99,6 +110,7 @@ watch(currentFont, (newValue, oldValue) => {
       border: none;
       font-size: 1.125rem;
       line-height: 1.3;
+      color: var(--text-color);
       text-align: left;
       cursor: pointer;
       background-color: transparent;

@@ -1,5 +1,7 @@
-
 :root {
+  --bg-color-1: var(--white);
+  --bg-color-2: var(--white);
+  --text-color: var(--dark2);
   --black: #050505;
   --white: #fff;
   --dark: #757575;
@@ -21,8 +23,20 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-color-1);
+
+  &.dark {
+    --bg-color-1: var(--black);
+    --bg-color-2: #1f1f1f;
+    --text-color: var(--white);
+    --input-background: #1f1f1f;
+  }
 }
 
 
