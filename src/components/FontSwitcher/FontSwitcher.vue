@@ -30,7 +30,7 @@ watch(currentFont, (newValue, oldValue) => {
   <div class="switcher">
     <button class="switcher__button" @click="toggleDropdown">
       <span>{{ currentFont }}</span>
-      <img :src="chevron" alt="" />
+      <img width="13" height="9" :src="chevron" alt="" />
     </button>
     <div
       class="switcher__fonts fonts"
