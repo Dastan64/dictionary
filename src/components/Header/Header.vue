@@ -8,7 +8,7 @@ import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher.vue';
 import FontSwitcher from '@/components/FontSwitcher/FontSwitcher.vue';
 
 //Core
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import router from '@/router/router';
 import { useThemeStore } from '@/stores/theme/theme';
 import { storeToRefs } from 'pinia';
@@ -17,13 +17,22 @@ const store = useThemeStore();
 const { isDarkTheme } = storeToRefs(store);
 
 const query = ref('');
+const error = ref('');
 
 const handleSubmit = () => {
   if (query.value) {
     router.push(`/search/${query.value}`);
     query.value = '';
+  } else {
+    error.value = 'Whoops, can’t be empty...';
   }
 };
+
+watch(query, (newValue) => {
+  if (newValue) {
+    error.value = '';
+  }
+});
 </script>
 
 <template>
@@ -39,18 +48,21 @@ const handleSubmit = () => {
       </div>
     </div>
     <div class="header__search search">
-      <form class="search__form" @submit.prevent="handleSubmit">
-        <input
-          v-model="query"
-          type="text"
-          class="search__input"
-          aria-label="Search the word..."
-          placeholder="Search the word..."
-        />
-        <button class="search__button">
-          <img :src="loupe" alt="" class="search__icon" />
-        </button>
-      </form>
+      <div class="search__container">
+        <form class="search__form" @submit.prevent="handleSubmit">
+          <input
+            v-model="query"
+            type="text"
+            class="search__input"
+            aria-label="Search the word..."
+            placeholder="Search the word..."
+          />
+          <button class="search__button">
+            <img :src="loupe" alt="" class="search__icon" />
+          </button>
+        </form>
+      </div>
+      <p v-if="error" class="search__error">{{ error }}</p>
     </div>
   </header>
 </template>
@@ -91,14 +103,13 @@ const handleSubmit = () => {
     background-color: var(--grey);
   }
 
-  &__search {
-    position: relative;
-    display: flex;
-  }
-
   .search {
     &__form {
       width: 100%;
+    }
+
+    &__container {
+      position: relative;
     }
 
     &__input {
@@ -115,6 +126,12 @@ const handleSubmit = () => {
       &:focus-visible {
         outline: 1px solid var(--accent);
       }
+    }
+
+    &__error {
+      margin-top: 8px;
+      font-size: clamp(1rem, 1vw + 0.5rem, calc(20rem / 16));
+      color: var(--error);
     }
 
     &__button {
