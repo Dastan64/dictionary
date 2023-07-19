@@ -103,7 +103,7 @@ const handleAudioEnding = () => {
       <ul class="meaning__list">
         <li v-for="item in info.meanings[1].definitions">
           <span>{{ item.definition }}</span>
-          <p class="meaning__example">"{{ item.example }}"</p>
+          <p v-if="item.example" class="meaning__example">"{{ item.example }}"</p>
         </li>
       </ul>
       <div class="synonyms" v-if="info.meanings[1].synonyms.length > 0">
