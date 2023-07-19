@@ -28,7 +28,7 @@ watch(route, (toParams) => {
 
 <template>
   <Loader v-if="status === 'loading'" />
-  <WordInfo v-if="info" />
+  <WordInfo v-if="status === 'success'" />
   <NotFoundThumb
     v-if="error?.title"
     title="Hm, could not find anything"
