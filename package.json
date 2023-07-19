@@ -1,12 +1,14 @@
 {
-  "name": "vue-project",
+  "name": "dictionary",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://dastan64.github.io/dictionary",
   "scripts": {
     "start": "vite --open",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
+    "deploy": "gh-pages -d dist",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/"

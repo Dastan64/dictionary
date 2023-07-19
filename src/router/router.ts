@@ -1,5 +1,5 @@
 import NotFoundThumb from '@/components/NotFoundThumb/NotFoundThumb.vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '@/views/Home/Home.vue';
 import Search from '@/views/Search/Search.vue';
 
@@ -19,7 +19,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 
