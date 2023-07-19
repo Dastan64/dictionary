@@ -38,9 +38,11 @@ watch(query, (newValue) => {
 <template>
   <header class="header">
     <div class="header__top">
-      <figure class="header__logo-container">
-        <img width="32" height="32" :src="logo" alt="Dictionary" class="header__logo" />
-      </figure>
+      <router-link to="/">
+        <figure class="header__logo-container">
+          <img width="32" height="32" :src="logo" alt="Dictionary" class="header__logo" />
+        </figure>
+      </router-link>
       <div class="header__settings">
         <FontSwitcher :isDarkTheme="isDarkTheme" />
         <span class="split-line"></span>
