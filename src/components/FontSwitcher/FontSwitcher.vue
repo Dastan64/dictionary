@@ -61,6 +61,7 @@ watch(currentFont, (newValue, oldValue) => {
     color: var(--text-color);
     cursor: pointer;
     background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
 
     @media screen and (max-width: 576px) {
       gap: 16px;

@@ -152,6 +152,7 @@ const handleAudioEnding = () => {
     border: none;
     cursor: pointer;
     background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
 
     svg {
       @media screen and (max-width: 576px) {
