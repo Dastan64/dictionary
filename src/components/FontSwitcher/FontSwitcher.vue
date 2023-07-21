@@ -12,8 +12,8 @@ const isDropdownOpen = ref(false);
 defineProps<{ isDarkTheme: boolean }>();
 
 const changeFont = (fontFamily: string) => {
-  isDropdownOpen.value = !isDropdownOpen.value;
   currentFont.value = fontFamily.toLowerCase();
+  isDropdownOpen.value = !isDropdownOpen.value;
 };
 
 const toggleDropdown = () => {

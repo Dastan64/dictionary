@@ -1,9 +1,9 @@
 <script setup lang="ts">
 //Core
 import { useInfoStore } from '@/stores/info/info';
+import { useThemeStore } from '@/stores/theme/theme';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
-import { useThemeStore } from '@/stores/theme/theme';
 
 const store = useInfoStore();
 const themeStore = useThemeStore();

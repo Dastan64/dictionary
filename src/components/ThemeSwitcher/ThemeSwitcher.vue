@@ -17,7 +17,13 @@ watch(isDarkTheme, (newValue) => {
 
 <template>
   <div class="switcher">
-    <input class="switcher__input" type="checkbox" id="switcher" v-model="isDarkTheme" />
+    <input
+      class="switcher__input"
+      type="checkbox"
+      id="switcher"
+      v-model="isDarkTheme"
+      aria-label="Enable dark theme"
+    />
     <label class="switcher__label" for="switcher"></label>
     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
       <path

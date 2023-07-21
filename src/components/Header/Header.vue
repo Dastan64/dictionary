@@ -59,8 +59,8 @@ watch(query, (newValue) => {
             aria-label="Search the word..."
             placeholder="Search the word..."
           />
-          <button class="search__button">
-            <img :src="loupe" alt="" class="search__icon" />
+          <button class="search__button" aria-label="Search the word">
+            <img width="16" height="16" :src="loupe" alt="" class="search__icon" />
           </button>
         </form>
       </div>
