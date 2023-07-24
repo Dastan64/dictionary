@@ -7,10 +7,13 @@ const store = useThemeStore();
 const { isDarkTheme } = storeToRefs(store);
 
 watch(isDarkTheme, (newValue) => {
+  console.log(newValue);
   if (newValue) {
     document.body.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
   } else {
     document.body.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
   }
 });
 </script>
