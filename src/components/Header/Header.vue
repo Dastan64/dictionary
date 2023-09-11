@@ -24,9 +24,6 @@ const { isDarkTheme } = storeToRefs(store);
         </figure>
       </router-link>
       <div class="header__right">
-        <nav class="header__nav">
-          <router-link to="/urban">Go Urban!</router-link>
-        </nav>
         <div class="header__settings">
           <FontSwitcher :isDarkTheme="isDarkTheme" />
           <span class="split-line"></span>
