@@ -9,7 +9,7 @@ import { useRoute } from 'vue-router';
 import { watch } from 'vue';
 
 const store = useInfoStore();
-const { error, status, info } = storeToRefs(store);
+const { error, status } = storeToRefs(store);
 
 const route = useRoute();
 const word = route.params.word;

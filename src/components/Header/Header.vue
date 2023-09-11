@@ -5,11 +5,11 @@ import logo from '@/assets/images/logo.svg';
 //Components
 import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher.vue';
 import FontSwitcher from '@/components/FontSwitcher/FontSwitcher.vue';
-import Search from '@/components/Header/Search/Search.vue';
 
 //Core
 import { useThemeStore } from '@/stores/theme/theme';
 import { storeToRefs } from 'pinia';
+import Search from './Search/Search.vue';
 
 const store = useThemeStore();
 const { isDarkTheme } = storeToRefs(store);
@@ -23,10 +23,15 @@ const { isDarkTheme } = storeToRefs(store);
           <img width="32" height="32" :src="logo" alt="Dictionary" class="header__logo" />
         </figure>
       </router-link>
-      <div class="header__settings">
-        <FontSwitcher :isDarkTheme="isDarkTheme" />
-        <span class="split-line"></span>
-        <ThemeSwitcher isDarkTheme="isDarkTheme" />
+      <div class="header__right">
+        <nav class="header__nav">
+          <router-link to="/urban">Go Urban!</router-link>
+        </nav>
+        <div class="header__settings">
+          <FontSwitcher :isDarkTheme="isDarkTheme" />
+          <span class="split-line"></span>
+          <ThemeSwitcher isDarkTheme="isDarkTheme" />
+        </div>
       </div>
     </div>
     <Search />
@@ -51,11 +56,17 @@ const { isDarkTheme } = storeToRefs(store);
     }
   }
 
-  &__settings {
+  &__right {
     display: flex;
     align-items: center;
     gap: 26px;
     margin-left: auto;
+  }
+
+  &__settings {
+    display: flex;
+    align-items: center;
+    gap: 26px;
 
     @media screen and (max-width: 576px) {
       gap: 16px;
